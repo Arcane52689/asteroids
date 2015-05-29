@@ -10,6 +10,7 @@
     body {
       text-align: center;
       font-family: sans-serif;
+      overflow: hidden;
     }
 
     .modal {
@@ -28,6 +29,12 @@
 
     }
 
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     canvas {
       margin: auto;
 
@@ -42,8 +49,23 @@
       <h2 id="score"> </h2>
     </header>
 
+    <div id="instructions" class="modal inactive">
+      <h1> Instructions </h1>
+      <ul>
+        <li>To move forward, hit "W"</li>
+        <li>To turn left, hit "A"</li>
+        <li>To turn right, hit "D"</li>
+        <li>To slow down, hit "S"</li>
+        <li>To fire a leaf, hit "space"</li>
+        <li>To start playing, or pause, hit "P" </li>
+      </ul>
+    </div>
 
-    <canvas id="game-canvas" width="1000" height="750"></canvas>
+
+    <div class="modal inactive" id="over">
+
+    </div>
+
     <script src="./lib/assets/javascripts/jquery.js"></script>
     <script src="./lib/assets/javascripts/movingObject.js"></script>
     <script src="./lib/assets/javascripts/utils.js"></script>
@@ -54,16 +76,24 @@
     <script src="./lib/assets/javascripts/keymaster.js"></script>
     <script src="./lib/assets/javascripts/bullet.js"></script>
     <script src="./lib/assets/javascripts/pointer.js"></script>
+    <canvas id="game-canvas" width="1000" height="750"></canvas>
 
     <script>
+
+
+
       var canvasEl = document.getElementsByTagName("canvas")[0];
-      var game = new Asteroids.Game();
+      var $canvas = $("#game-canvas");
+      var width = $(window).width();
+      var height = $(window).height();
+      $canvas.attr("height", height);
+      $canvas.attr("width", width );
+
+      var game = new Asteroids.Game(width, height);
       var ctx = canvasEl.getContext("2d");
-      new Asteroids.GameView(game, ctx).start();
+      var gameView =new Asteroids.GameView(game, ctx);
+      gameView.pause();
     </script>
-
-
-    <div id="over" class="inactive modal"></div>
 
 
 
