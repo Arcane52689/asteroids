@@ -1,9 +1,18 @@
 <html>
   <head>
-    <title></title>
+    <title>Austroids</title>
   </head>
 
   <style>
+    header, h1, h2 ul, li, canvas {
+      font: inherit;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      outline: 0;
+    }
+
+
     .inactive {
       display: none;
     }
@@ -29,15 +38,54 @@
 
     }
 
+    #image {
+      position: fixed;
+      z-index: -1;
+      top:0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+
+
+
+    }
+
     header {
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 1;
     }
 
     canvas {
-      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    h1 {
+      font-size: 24px;
+    }
 
+    h2 {
+      font-size: 18px;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      width: 250px;
+      margin: auto;
+      text-align: left;
+    }
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
     }
 
   </style>
@@ -52,10 +100,10 @@
     <div id="instructions" class="modal inactive">
       <h1> Instructions </h1>
       <ul>
-        <li>To move forward, hit "W"</li>
-        <li>To turn left, hit "A"</li>
-        <li>To turn right, hit "D"</li>
-        <li>To slow down, hit "S"</li>
+        <li>To move forward, hit "Up"</li>
+        <li>To turn left, hit "Left"</li>
+        <li>To turn right, hit "Right"</li>
+        <li>To slow down, hit "Down"</li>
         <li>To fire a leaf, hit "space"</li>
         <li>To start playing, or pause, hit "P" </li>
       </ul>
@@ -64,6 +112,10 @@
 
     <div class="modal inactive" id="over">
 
+    </div>
+
+    <div class="" id="image">
+      <img src="./lib/assets/images/Australia.png" alt="" />
     </div>
 
     <script src="./lib/assets/javascripts/jquery.js"></script>
@@ -76,9 +128,10 @@
     <script src="./lib/assets/javascripts/keymaster.js"></script>
     <script src="./lib/assets/javascripts/bullet.js"></script>
     <script src="./lib/assets/javascripts/pointer.js"></script>
-    <canvas id="game-canvas" width="1000" height="750"></canvas>
+    <canvas id="game-canvas"></canvas>
 
     <script>
+
 
 
 
@@ -91,8 +144,9 @@
 
       var game = new Asteroids.Game(width, height);
       var ctx = canvasEl.getContext("2d");
-      var gameView =new Asteroids.GameView(game, ctx);
-      gameView.pause();
+      window.gameView =new Asteroids.GameView(game, ctx);
+      window.gameView.start();
+      window.gameView.pause();
     </script>
 
 
